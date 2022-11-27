@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyle } from './styles/global'
+import { defaultTheme } from './styles/themes/default'
 
 function App() {
-
   return (
-    <div className="App">
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <div className="App">sasa</div>
+
+      <GlobalStyle />
+    </ThemeProvider>
   )
 }
 
