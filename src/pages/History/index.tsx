@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header";
-import { HistoryCotainer, HistoryList } from "./styles";
+import { HistoryCotainer, HistoryList, Status } from "./styles";
 
 const History = () => {
   return (
@@ -21,25 +21,33 @@ const History = () => {
               <td>Tarefa</td>
               <td>20 minutos.</td>
               <td>Há dois meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluído</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos.</td>
               <td>Há dois meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="yellow">Em andamento</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos.</td>
               <td>Há dois meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="red">Interrompido</Status>
+              </td>
             </tr>
             <tr>
               <td>Tarefa</td>
               <td>20 minutos.</td>
               <td>Há dois meses</td>
-              <td>Concluído</td>
+              <td>
+                <Status statusColor="green">Concluído</Status>
+              </td>
             </tr>
           </tbody>
         </table>
