@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../components/Header'
 
 const History = () => {
   return (
-    <div>History</div>
+    <div>
+        <h1>History</h1>
+    </div>
   )
 }
 
