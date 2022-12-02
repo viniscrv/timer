@@ -2,9 +2,11 @@ import { HandPalm, Play } from "phosphor-react";
 import { FormProvider, useForm } from "react-hook-form";
 import zod from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { CyclesContext } from "../../contexts/CyclesContext";
 import { HomeContainer, StartCountdownButton, StopCountdownButton } from "./styles";
-import NewCycleForm from "./components/NewCycleForm"
 import Countdown from "./components/Countdown";
+import NewCycleForm from "./components/NewCycleForm";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa"),
@@ -15,6 +17,8 @@ const newCycleFormValidationSchema = zod.object({
 });
 
 const Home = () => {
+
+  const { createNewCycle, interruptCurrentCycle, activeCycle } = useContext(CyclesContext)
 
   interface newCycleFormData {
     task: string;
@@ -32,35 +36,13 @@ const Home = () => {
   const { handleSubmit, watch, reset } = newCycleForm;
 
   function handleCreateNewCycle(data: newCycleFormData) {
-    const newCycle: Cycle = {
-      id: String(new Date().getTime()),
-      task: data.task,
-      minutesAmount: data.minutesAmount,
-      startDate: new Date(),
-    }
-
-    setCycles(prev => [...prev, newCycle]);
-    setActiveCycleId(newCycle.id);
-    setAmountSecondsPassed(0);
-
+    createNewCycle(data);
     reset();
-  }
-
-  function handleInterruptCycle() {
-    
-    setCycles(prev => prev.map(cycle => {
-      if(cycle.id === activeCycleId){
-        return { ...cycle, interruptedDate: new Date() }
-      } else {
-        return cycle
-      }
-    }))
-
-    setActiveCycleId(null);
   }
 
   const task = watch("task");
   const isSubmitDisabled = !task;
+
 
   return (
     <HomeContainer>
@@ -72,7 +54,7 @@ const Home = () => {
         <Countdown />
 
         { activeCycle ? (
-          <StopCountdownButton type="button" onClick={handleInterruptCycle}>
+          <StopCountdownButton type="button" onClick={interruptCurrentCycle}>
             <HandPalm size={24}/>
             Interromper
           </StopCountdownButton>
