@@ -43,7 +43,6 @@ const Home = () => {
   const task = watch("task");
   const isSubmitDisabled = !task;
 
-
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">

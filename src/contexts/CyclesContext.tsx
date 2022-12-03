@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useReducer, useState } from "react";
 import { Cycle, cyclesReducer } from "../reducers/cycles/reducer";
-import { ActionTypes, addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
+import { addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
 import { differenceInSeconds } from "date-fns";
 
 interface CreateCycleData {
@@ -36,6 +36,10 @@ export function CyclesContextProvider({
 
     if (storedStateAsJSON) {
       return JSON.parse(storedStateAsJSON);
+    } 
+    return {
+      cycles: [],
+      activeCycleId: null
     }
   });
 
@@ -56,8 +60,7 @@ export function CyclesContextProvider({
 
     localStorage.setItem("@timer:cycles-state-1.0.0", stateJSON);
 
-  }, [cyclesState])
-
+  }, [cyclesState]);
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds);
