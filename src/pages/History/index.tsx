@@ -37,7 +37,7 @@ const History = () => {
                     { !cycle.finishedDate && !cycle.interruptedDate && <Status statusColor="yellow">Em andamento</Status> }
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
